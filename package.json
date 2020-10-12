@@ -1,0 +1,19 @@
+{
+  "name": "api-config",
+  "version": "1.0.0",
+  "description": "Simple SAM config system",
+  "author": "Chris Sullivan <chrissullivan.dev@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "config": "^3.3.2",
+    "fs-extra": "^9.0.1"
+  },
+  "scripts": {
+    "deploy:dev": "export ENV=dev ; yarn deploy",
+    "deploy:prod": "export ENV=prod ; yarn deploy",
+    "deploy": "./scripts/deploy.sh",
+    "postdeploy": "yarn && yarn build && yarn upload",
+    "build": "node scripts/build.js",
+    "upload": "./scripts/upload.sh"
+  }
+}

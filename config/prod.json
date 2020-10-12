@@ -1,0 +1,7 @@
+
+{
+    "featureGates": {
+        "feature-a": false,
+        "feature-b": false
+    }
+}
