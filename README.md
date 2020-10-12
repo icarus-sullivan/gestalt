@@ -6,7 +6,16 @@
 2. Make sure to use a stack name defined as `stack_name = "api-config-<stage>"`
 3. Add the deploy script `"deploy:stage": "export NODE_ENV=stage ; yarn deploy",`
 
-Deployment:
+## Parameters
+
+| Parameter | Description | 
+|--|--|
+| ZoneId | The pre-defined ZoneId for a Route53 hosted zone |
+| Domain | The domain you would like to use |
+| CertificateArn | A pre-defined CertificateArn for an AWS Certificate Manager |
+| Stage | The stage you wish to use |
+
+## Deployment
 
 ```bash
 yarn deploy:dev 
