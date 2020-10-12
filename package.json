@@ -9,8 +9,8 @@
     "fs-extra": "^9.0.1"
   },
   "scripts": {
-    "deploy:dev": "export ENV=dev ; yarn deploy",
-    "deploy:prod": "export ENV=prod ; yarn deploy",
+    "deploy:dev": "export NODE_ENV=dev ; yarn deploy",
+    "deploy:prod": "export NODE_ENV=prod ; yarn deploy",
     "deploy": "./scripts/deploy.sh",
     "postdeploy": "yarn && yarn build && yarn upload",
     "build": "node scripts/build.js",
