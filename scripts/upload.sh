@@ -6,4 +6,4 @@ if [ -z ${NODE_ENV+x} ]; then
     exit 1;
 fi
 
-aws s3 sync build "s3://api-config-$NODE_ENV"
+aws s3 sync build "s3://gestalt-$NODE_ENV"

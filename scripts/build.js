@@ -10,6 +10,5 @@ fs.ensureDirSync(BUILD_DIR);
 
 
 const content = JSON.stringify(config, null, 2);
-
 fs.writeFileSync(path.join(BUILD_DIR, `${version}.json`), content, 'utf8');
 fs.writeFileSync(path.join(BUILD_DIR, `latest.json`), content, 'utf8');

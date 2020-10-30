@@ -1,5 +1,5 @@
 {
-  "name": "api-config",
+  "name": "gestalt",
   "version": "1.0.0",
   "description": "Simple SAM config system",
   "author": "Chris Sullivan <chrissullivan.dev@gmail.com>",
