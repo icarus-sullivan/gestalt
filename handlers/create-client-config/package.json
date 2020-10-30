@@ -1,0 +1,14 @@
+{
+  "name": "gestalt-create-client",
+  "version": "1.0.0",
+  "author": "Chris Sullivan",
+  "license": "MIT",
+  "files": [
+    "src/*"
+  ],
+  "dependencies": {
+    "@teleology/lambda-api": "^0.1.2",
+    "aws-sdk": "^2.771.0",
+    "uuid": "^8.3.1"
+  }
+}

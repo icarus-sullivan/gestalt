@@ -23,4 +23,37 @@ yarn deploy:prod
 ```
 
 
+# Endpoint Examples
 
+### Get config
+/
+
+Optional: 
+ - ?version=latest or semver
+ - ?key='specific path'
+
+```
+var config = {
+  method: 'get',
+  url: 'https://config-dev.teleology.io',
+  headers: { 
+    'Authorization': 'C3297B1F-CEF7-4EE8-852B-B9E4E0766E88'
+  }
+};
+```
+
+
+### Create Client Config Overrides 
+/client/{client_id}
+```
+var data = JSON.stringify({"config":{"name":"doo"}});
+var config = {
+  method: 'post',
+  url: 'https://config-dev.teleology.io/client/58F981F8-3FAF-4DBE-A3AC-29DAC372698D',
+  headers: { 
+    'Authorization': 'Bearer C3297B1F-CEF7-4EE8-852B-B9E4E0766E88', 
+    'Content-Type': 'application/json'
+  },
+  data : data
+};
+```
