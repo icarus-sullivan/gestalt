@@ -9,6 +9,7 @@
   "dependencies": {
     "@teleology/lambda-api": "^0.1.2",
     "aws-sdk": "^2.771.0",
-    "lodash.get": "^4.4.2"
+    "lodash.get": "^4.4.2",
+    "lodash.merge": "^4.6.2"
   }
 }

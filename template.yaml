@@ -89,6 +89,9 @@ Resources:
               - method.request.querystring.key:
                   Required: false
                   Caching: false
+              - method.request.querystring.client_id:
+                  Required: false
+                  Caching: false
               - method.request.header.Authorization:
                   Required: true
                   Caching: true

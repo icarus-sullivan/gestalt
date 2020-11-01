@@ -1,4 +1,4 @@
-# api-global-config
+# gestalt
 
 ## Setting up a Stage
 
@@ -26,34 +26,31 @@ yarn deploy:prod
 # Endpoint Examples
 
 ### Get config
-/
-
-Optional: 
- - ?version=latest or semver
- - ?key='specific path'
-
 ```
-var config = {
-  method: 'get',
-  url: 'https://config-dev.teleology.io',
-  headers: { 
-    'Authorization': 'C3297B1F-CEF7-4EE8-852B-B9E4E0766E88'
-  }
-};
+GET / HTTP/1.1
+Host: config-dev.teleology.io
+Authorization: Bearer <token>
 ```
 
+| Params | Default | Description | 
+|--|--|--|
+| version | latest | The version of the config |
+| key | undefined | A specific key within the config, with dot-notation |
+| client_id | undefined | Fetches the client and applies any overrides the client has |
 
 ### Create Client Config Overrides 
-/client/{client_id}
+
 ```
-var data = JSON.stringify({"config":{"name":"doo"}});
-var config = {
-  method: 'post',
-  url: 'https://config-dev.teleology.io/client/58F981F8-3FAF-4DBE-A3AC-29DAC372698D',
-  headers: { 
-    'Authorization': 'Bearer C3297B1F-CEF7-4EE8-852B-B9E4E0766E88', 
-    'Content-Type': 'application/json'
-  },
-  data : data
-};
+POST /client/<client_id> HTTP/1.1
+Host: config-dev.teleology.io
+Authorization: Bearer <token>
+Content-Type: application/json
+
+{
+    "config": {
+        "featureGates": {
+            "feature-b": false
+        }
+    }
+}
 ```
