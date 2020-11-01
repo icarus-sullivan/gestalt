@@ -1,5 +1,5 @@
 {
-  "name": "gestalt-get-config",
+  "name": "gestalt-create-client",
   "version": "1.0.0",
   "author": "Chris Sullivan",
   "license": "MIT",
@@ -9,7 +9,6 @@
   "dependencies": {
     "@teleology/lambda-api": "^0.1.2",
     "aws-sdk": "^2.771.0",
-    "lodash.get": "^4.4.2",
-    "lodash.merge": "^4.6.2"
+    "uuid": "^8.3.1"
   }
 }

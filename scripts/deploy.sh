@@ -13,4 +13,4 @@ else
     exit 1 
 fi
 
-sam build ; sam deploy --force-upload
+sam build ; sam deploy --no-fail-on-empty-changeset

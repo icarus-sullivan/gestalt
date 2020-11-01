@@ -1,4 +1,4 @@
-# api-global-config
+# gestalt
 
 ## Setting up a Stage
 
@@ -23,4 +23,34 @@ yarn deploy:prod
 ```
 
 
+# Endpoint Examples
 
+### Get config
+```
+GET / HTTP/1.1
+Host: config-dev.teleology.io
+Authorization: Bearer <token>
+```
+
+| Params | Default | Description | 
+|--|--|--|
+| version | latest | The version of the config |
+| key | undefined | A specific key within the config, with dot-notation |
+| client_id | undefined | Fetches the client and applies any overrides the client has |
+
+### Create Client Config Overrides 
+
+```
+POST /client/<client_id> HTTP/1.1
+Host: config-dev.teleology.io
+Authorization: Bearer <token>
+Content-Type: application/json
+
+{
+    "config": {
+        "featureGates": {
+            "feature-b": false
+        }
+    }
+}
+```
