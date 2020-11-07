@@ -3,9 +3,16 @@ const tokenTable = require('./dynamo');
 
 const PREAMBLE = /bearer /gi;
 
-exports.default = async ({ authorizationToken, methodArn }) => {
+exports.default = async ({ authorizationToken, methodArn, ...rest }) => {
+  console.log({
+    authorizationToken,
+    methodArn,
+    rest,
+  })
   const token = authorizationToken.replace(PREAMBLE, '');
   const exists = await tokenTable.get(token);
+
+  const [arn] = methodArn.split('/');
 
   return {
     // principalId: 'user',
@@ -16,7 +23,7 @@ exports.default = async ({ authorizationToken, methodArn }) => {
         {
           Action: 'execute-api:Invoke',
           Effect: exists ? 'Allow' : 'Deny',
-          Resource: methodArn,
+          Resource: arn + '/*/*' //methodArn,
         },
       ],
     },
