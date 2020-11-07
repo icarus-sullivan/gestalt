@@ -28,7 +28,7 @@ yarn deploy:prod
 ### Get config
 ```
 GET / HTTP/1.1
-Host: config-dev.teleology.io
+Host: <domain>
 Authorization: Bearer <token>
 ```
 
@@ -42,7 +42,7 @@ Authorization: Bearer <token>
 
 ```
 POST /client/<client_id> HTTP/1.1
-Host: config-dev.teleology.io
+Host: <domain>
 Authorization: Bearer <token>
 Content-Type: application/json
 
@@ -59,7 +59,7 @@ Content-Type: application/json
 
 ```
 PUT /client/<client_id> HTTP/1.1
-Host: config-dev.teleology.io
+Host: <domain>
 Authorization: Bearer <token>
 Content-Type: application/json
 
