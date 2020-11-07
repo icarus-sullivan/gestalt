@@ -42,6 +42,11 @@ Resources:
           AttributeType: S
       BillingMode: PAY_PER_REQUEST
 
+  ConfigBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Ref 'AWS::StackName'
+
   ApiGatewayApi:
     Type: AWS::Serverless::Api
     Properties:
@@ -60,11 +65,11 @@ Resources:
         Authorizers:
           LambdaTokenAuthorizer:
             FunctionArn: !GetAtt Authorizer.Arn
-
-  ConfigBucket:
-    Type: AWS::S3::Bucket
-    Properties:
-      BucketName: !Ref 'AWS::StackName'
+            Identity:
+              ValidationExpression: ^Bearer [-0-9a-zA-z\.]*
+              ReauthorizeEvery: 3600
+              Headers:
+                - Authorization
 
   GetConfigFunction:
     Type: AWS::Serverless::Function
@@ -94,7 +99,7 @@ Resources:
                   Caching: false
               - method.request.header.Authorization:
                   Required: true
-                  Caching: true
+                  Caching: false
       Policies:
         - S3ReadPolicy:
             BucketName: !Ref 'AWS::StackName'
@@ -115,7 +120,7 @@ Resources:
       CodeUri: handlers/create-client-config/
       Handler: src/index.default
       Events:
-        GetConfig:
+        CustomConfig:
           Type: Api 
           Properties:
             Path: /client/{client_id}
@@ -127,7 +132,37 @@ Resources:
                   Caching: true
               - method.request.header.Authorization:
                   Required: true
+                  Caching: false
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref ClientOverridesDynamoDB
+      Environment:
+        Variables:
+          CLIENT_TABLE: !Ref ClientOverridesDynamoDB
+
+  UpdatelientConfigFunction:
+    Type: AWS::Serverless::Function
+    DependsOn: 'ConfigBucket'
+    Properties:
+      FunctionName: !Sub
+        - ${Stack}-update-client
+        - { Stack: !Ref 'AWS::StackName' }
+      CodeUri: handlers/update-client-config/
+      Handler: src/index.default
+      Events:
+        UpdateCustomConfig:
+          Type: Api 
+          Properties:
+            Path: /client/{client_id}
+            Method: put
+            RestApiId: !Ref ApiGatewayApi
+            RequestParameters:
+              - method.request.path.client_id:
+                  Required: true
                   Caching: true
+              - method.request.header.Authorization:
+                  Required: true
+                  Caching: false
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref ClientOverridesDynamoDB
