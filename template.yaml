@@ -53,7 +53,11 @@ Resources:
       StageName: !Ref Stage
       EndpointConfiguration: EDGE
       Name: !Ref 'AWS::StackName'
-      Cors: "'*'"
+      Cors:
+        AllowMethods: "'GET,PUT,POST,DELETE,HEAD,OPTIONS'"
+        AllowHeaders: "'*'"
+        AllowOrigin: "'*'"
+        AllowCredentials: "'*'"
       Domain:
         EndpointConfiguration: EDGE
         DomainName: !Sub '${Domain}'
@@ -62,6 +66,7 @@ Resources:
           HostedZoneId: !Sub '${ZoneId}'
       Auth:
         DefaultAuthorizer: LambdaTokenAuthorizer
+        AddDefaultAuthorizerToCorsPreflight: false
         Authorizers:
           LambdaTokenAuthorizer:
             FunctionArn: !GetAtt Authorizer.Arn
